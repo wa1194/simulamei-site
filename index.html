@@ -3,28 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SimulaMei - Gestão para MEI</title>
+    <title>SimulaMei - Gestão Inteligente</title>
     <style>
+        /* AQUI FICAM AS CORES DO SEU LOGO */
         :root {
-            --primary: #2563eb;
-            --dark: #1e293b;
-            --light: #f8fafc;
+            --azul-logo: #22428C;  /* Azul extraído do Escudo */
+            --verde-logo: #009640; /* Verde extraído do Escudo */
+            --fundo: #f8fafc;
+            --texto: #334155;
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             line-height: 1.6;
-            color: #333;
-            background-color: var(--light);
+            color: var(--texto);
+            background-color: var(--fundo);
         }
+
+        /* CABEÇALHO COM A COR AZUL DO LOGO */
         header {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--azul-logo) 0%, #1e3a8a 100%);
             color: white;
             padding: 4rem 2rem;
             text-align: center;
         }
-        h1 { margin: 0; font-size: 3rem; }
+
+        /* ESTILO DA IMAGEM DO LOGO */
+        .logo-img {
+            max-width: 150px;
+            margin-bottom: 20px;
+            border-radius: 10px; /* Borda arredondada opcional */
+        }
+
+        h1 { margin: 0; font-size: 2.5rem; font-weight: 800; }
         .subtitle { font-size: 1.2rem; opacity: 0.9; margin-top: 10px; }
+
+        /* ESTILO DOS BOTÕES */
+        .btn-container { margin-top: 30px; }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 10px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* Botão Verde (Destaque) */
+        .btn-verde {
+            background-color: var(--verde-logo);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 150, 64, 0.4);
+        }
+        .btn-verde:hover {
+            background-color: #007a33;
+            transform: translateY(-3px);
+        }
+
+        /* Botão Transparente */
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--azul-logo);
+        }
         
         .container {
             max-width: 1000px;
@@ -42,74 +89,63 @@
         .card {
             background: white;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-        }
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px;}
-        
-        .cta-section {
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 3rem 2rem;
-            margin-top: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--verde-logo); /* Detalhe verde no topo dos cards */
         }
         
+        .card h3 { color: var(--azul-logo); }
+
         footer {
             text-align: center;
             padding: 2rem;
             background: #cbd5e1;
             font-size: 0.9rem;
+            margin-top: 4rem;
         }
     </style>
 </head>
 <body>
 
     <header>
+        <img src="logo.png" alt="Logo SimulaMei" class="logo-img">
+        
         <h1>SimulaMei</h1>
         <p class="subtitle">Gestão Financeira Simplificada para o Microempreendedor</p>
-        <p style="margin-top: 20px; font-style: italic;">"Transforme a incerteza do seu negócio em números reais."</p>
+        
+        <div class="btn-container">
+            <a href="#" class="btn btn-verde">Baixar Aplicativo</a>
+            <a href="#funcionalidades" class="btn btn-outline">Saiba Mais</a>
+        </div>
     </header>
 
-    <div class="container">
-        <h2 style="text-align: center; color: var(--dark);">Por que usar o SimulaMei?</h2>
+    <div class="container" id="funcionalidades">
+        <h2 style="text-align: center; color: var(--azul-logo);">O Fim da Incerteza no Seu Negócio</h2>
         <p style="text-align: center; max-width: 700px; margin: 0 auto;">
-            Muitos negócios fecham as portas por falta de planejamento. O SimulaMei automatiza cálculos financeiros complexos, 
-            permitindo que você tome decisões baseadas em dados, sem precisar ser um expert em matemática.
+            Planeje, simule e cresça. O SimulaMei traduz a matemática financeira para a realidade do seu dia a dia.
         </p>
 
         <div class="grid">
             <div class="card">
                 <h3>📊 Ponto de Equilíbrio</h3>
-                <p><strong>Sua meta mínima de sobrevivência.</strong></p>
-                <p>Calculamos exatamente quanto você precisa vender para cobrir seus custos fixos e variáveis. A partir desse valor, começa o seu lucro real.</p>
+                <p>Descubra exatamente quanto você precisa vender para pagar as contas e começar a lucrar de verdade.</p>
             </div>
 
             <div class="card">
-                <h3>💰 Valor Presente Líquido (VPL)</h3>
-                <p><strong>O valor do dinheiro no tempo.</strong></p>
-                <p>Ajudamos a visualizar se vale a pena investir aquele dinheiro no seu negócio hoje ou se é melhor deixá-lo rendendo em uma aplicação segura.</p>
+                <h3>💰 Valor Presente (VPL)</h3>
+                <p>Vale a pena investir agora? O app calcula se o seu dinheiro rende mais no negócio ou no banco.</p>
             </div>
 
             <div class="card">
-                <h3>📈 Taxa Interna de Retorno (TIR)</h3>
-                <p><strong>Raio-X do Investimento.</strong></p>
-                <p>Mostramos a rentabilidade real do seu projeto em porcentagem, para você comparar com outras opções de mercado de forma clara.</p>
+                <h3>📈 Taxa de Retorno (TIR)</h3>
+                <p>Veja a rentabilidade real do seu projeto em porcentagem e compare com o mercado.</p>
             </div>
         </div>
     </div>
 
-    <div class="cta-section">
-        <h2>Projeto em Desenvolvimento</h2>
-        <p>Seminário Integrador VI - Bacharelado em Ciência e Tecnologia</p>
-        <p>UFMT - Polo Sorriso</p>
-    </div>
-
     <footer>
-        <p>&copy; 2026 SimulaMei. Todos os direitos reservados.</p>
-        <p>Equipe: Thayna Sara de Oliveira Moises da Silva Bispo & Walter Aparecido da Silva Bispo & Jussara Ferrais do Santos</p>
+        <p>&copy; 2026 SimulaMei - Projeto Integrador VI</p>
+        <p>UFMT - Polo Sorriso | Desenvolvido por Thayna Sara de Oliveira Moises da Silva bispo & Walter Aparecido da Silva Bispo & Jussara Ferrais dos Santos</p>
     </footer>
 
 </body>
