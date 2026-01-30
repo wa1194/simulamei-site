@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SimulaMei - Gestão Inteligente</title>
+    <title>SimulaMei - App Web</title>
     <style>
-        /* AQUI FICAM AS CORES DO SEU LOGO */
         :root {
-            --azul-logo: #22428C;  /* Azul extraído do Escudo */
-            --verde-logo: #009640; /* Verde extraído do Escudo */
+            --azul-logo: #22428C;
+            --verde-logo: #009640;
             --fundo: #f8fafc;
             --texto: #334155;
         }
@@ -21,86 +20,112 @@
             background-color: var(--fundo);
         }
 
-        /* CABEÇALHO COM A COR AZUL DO LOGO */
+        /* HEADER */
         header {
             background: linear-gradient(135deg, var(--azul-logo) 0%, #1e3a8a 100%);
             color: white;
-            padding: 4rem 2rem;
+            padding: 3rem 1rem;
             text-align: center;
         }
+        .logo-img { max-width: 120px; border-radius: 10px; margin-bottom: 15px; }
+        h1 { margin: 0; font-size: 2.2rem; font-weight: 800; }
+        .subtitle { font-size: 1.1rem; opacity: 0.9; }
 
-        /* ESTILO DA IMAGEM DO LOGO */
-        .logo-img {
-            max-width: 150px;
+        /* SEÇÃO DE CÁLCULOS (O APP) */
+        .app-section {
+            max-width: 800px;
+            margin: -30px auto 0;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
             margin-bottom: 20px;
-            border-radius: 10px; /* Borda arredondada opcional */
+            flex-wrap: wrap;
         }
 
-        h1 { margin: 0; font-size: 2.5rem; font-weight: 800; }
-        .subtitle { font-size: 1.2rem; opacity: 0.9; margin-top: 10px; }
-
-        /* ESTILO DOS BOTÕES */
-        .btn-container { margin-top: 30px; }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            margin: 10px;
+        .tab-btn {
+            background: white;
+            border: none;
+            padding: 15px 25px;
             border-radius: 50px;
-            text-decoration: none;
             font-weight: bold;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        /* Botão Verde (Destaque) */
-        .btn-verde {
-            background-color: var(--verde-logo);
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 150, 64, 0.4);
-        }
-        .btn-verde:hover {
-            background-color: #007a33;
-            transform: translateY(-3px);
-        }
-
-        /* Botão Transparente */
-        .btn-outline {
-            border: 2px solid white;
-            color: white;
-        }
-        .btn-outline:hover {
-            background-color: white;
             color: var(--azul-logo);
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
         }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
+
+        .tab-btn.active {
+            background: var(--verde-logo);
+            color: white;
+            transform: scale(1.05);
         }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .card {
+
+        .calculator-card {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--verde-logo); /* Detalhe verde no topo dos cards */
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: none; /* Escondido por padrão */
+            animation: fadeIn 0.5s;
         }
+        .calculator-card.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        h2 { color: var(--azul-logo); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         
-        .card h3 { color: var(--azul-logo); }
+        /* FORMULÁRIOS */
+        .form-group { margin-bottom: 15px; text-align: left; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        input:focus { border-color: var(--azul-logo); outline: none; }
+
+        button.calc-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--azul-logo);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        button.calc-btn:hover { background-color: #1e3a8a; }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            color: #166534;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.2rem;
+            display: none;
+        }
 
         footer {
             text-align: center;
             padding: 2rem;
             background: #cbd5e1;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             margin-top: 4rem;
         }
     </style>
@@ -108,45 +133,180 @@
 <body>
 
     <header>
-        <img src="logo.png" alt="Logo SimulaMei" class="logo-img">
-        
+        <img src="logo.png" alt="SimulaMei" class="logo-img" onerror="this.style.display='none'">
         <h1>SimulaMei</h1>
-        <p class="subtitle">Gestão Financeira Simplificada para o Microempreendedor</p>
-        
-        <div class="btn-container">
-            <a href="#" class="btn btn-verde">Baixar Aplicativo</a>
-            <a href="#funcionalidades" class="btn btn-outline">Saiba Mais</a>
-        </div>
+        <p class="subtitle">Ferramenta de Gestão Financeira</p>
     </header>
 
-    <div class="container" id="funcionalidades">
-        <h2 style="text-align: center; color: var(--azul-logo);">O Fim da Incerteza no Seu Negócio</h2>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto;">
-            Planeje, simule e cresça. O SimulaMei traduz a matemática financeira para a realidade do seu dia a dia.
-        </p>
+    <div class="app-section">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('pe')">Ponto de Equilíbrio</button>
+            <button class="tab-btn" onclick="showTab('vpl')">VPL (Investimento)</button>
+            <button class="tab-btn" onclick="showTab('tir')">TIR (Rentabilidade)</button>
+        </div>
 
-        <div class="grid">
-            <div class="card">
-                <h3>📊 Ponto de Equilíbrio</h3>
-                <p>Descubra exatamente quanto você precisa vender para pagar as contas e começar a lucrar de verdade.</p>
+        <div id="pe" class="calculator-card active">
+            <h2>📊 Ponto de Equilíbrio</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 20px;">Descubra quanto você precisa vender para cobrir os custos.</p>
+            
+            <div class="form-group">
+                <label>Custos Fixos Totais (R$)</label>
+                <input type="number" id="pe_custos" placeholder="Ex: Aluguel, Internet (2000)">
             </div>
+            <div class="form-group">
+                <label>Preço de Venda Unitário (R$)</label>
+                <input type="number" id="pe_preco" placeholder="Ex: Preço do produto (50)">
+            </div>
+            <div class="form-group">
+                <label>Custo Variável Unitário (R$)</label>
+                <input type="number" id="pe_variavel" placeholder="Ex: Custo para produzir um (20)">
+            </div>
+            <button class="calc-btn" onclick="calcularPE()">Calcular Meta</button>
+            <div id="result_pe" class="result-box"></div>
+        </div>
 
-            <div class="card">
-                <h3>💰 Valor Presente (VPL)</h3>
-                <p>Vale a pena investir agora? O app calcula se o seu dinheiro rende mais no negócio ou no banco.</p>
-            </div>
+        <div id="vpl" class="calculator-card">
+            <h2>💰 VPL - Valor Presente Líquido</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 20px;">Veja se o investimento vale a pena hoje.</p>
 
-            <div class="card">
-                <h3>📈 Taxa de Retorno (TIR)</h3>
-                <p>Veja a rentabilidade real do seu projeto em porcentagem e compare com o mercado.</p>
+            <div class="form-group">
+                <label>Investimento Inicial (R$)</label>
+                <input type="number" id="vpl_investimento" placeholder="Ex: 5000">
             </div>
+            <div class="form-group">
+                <label>Taxa de Desconto Anual (%)</label>
+                <input type="number" id="vpl_taxa" placeholder="Ex: 10 (Poupança/Selic)">
+            </div>
+            <div class="form-group">
+                <label>Lucro Esperado Ano 1 (R$)</label>
+                <input type="number" class="fluxo" placeholder="Ex: 1500">
+            </div>
+            <div class="form-group">
+                <label>Lucro Esperado Ano 2 (R$)</label>
+                <input type="number" class="fluxo" placeholder="Ex: 2000">
+            </div>
+            <div class="form-group">
+                <label>Lucro Esperado Ano 3 (R$)</label>
+                <input type="number" class="fluxo" placeholder="Ex: 2500">
+            </div>
+            <button class="calc-btn" onclick="calcularVPL()">Calcular VPL</button>
+            <div id="result_vpl" class="result-box"></div>
+        </div>
+
+        <div id="tir" class="calculator-card">
+            <h2>📈 TIR - Taxa Interna de Retorno</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 20px;">A rentabilidade real do seu projeto em %.</p>
+
+            <div class="form-group">
+                <label>Investimento Inicial (R$)</label>
+                <input type="number" id="tir_investimento" placeholder="Ex: 5000">
+            </div>
+            <div class="form-group">
+                <label>Retorno Ano 1 (R$)</label>
+                <input type="number" class="tir-fluxo" placeholder="Ex: 2000">
+            </div>
+            <div class="form-group">
+                <label>Retorno Ano 2 (R$)</label>
+                <input type="number" class="tir-fluxo" placeholder="Ex: 2500">
+            </div>
+            <div class="form-group">
+                <label>Retorno Ano 3 (R$)</label>
+                <input type="number" class="tir-fluxo" placeholder="Ex: 3000">
+            </div>
+            <button class="calc-btn" onclick="calcularTIR()">Calcular TIR</button>
+            <div id="result_tir" class="result-box"></div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 SimulaMei - Projeto Integrador VI</p>
-        <p>UFMT - Polo Sorriso | Desenvolvido por Thayna Sara de Oliveira Moises da Silva bispo & Walter Aparecido da Silva Bispo & Jussara Ferrais dos Santos</p>
+        <p>&copy; 2026 SimulaMei - Web App Versão 1.0</p>
+        <p>Projeto Integrador VI - UFMT Polo Sorriso</p>
     </footer>
+
+    <script>
+        // Função para trocar de abas
+        function showTab(tabId) {
+            document.querySelectorAll('.calculator-card').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Lógica Ponto de Equilíbrio
+        function calcularPE() {
+            let custos = parseFloat(document.getElementById('pe_custos').value);
+            let preco = parseFloat(document.getElementById('pe_preco').value);
+            let variavel = parseFloat(document.getElementById('pe_variavel').value);
+            let div = document.getElementById('result_pe');
+
+            if (!custos || !preco) {
+                div.style.display = 'block'; div.style.color = 'red'; div.style.background = '#fee2e2';
+                div.innerHTML = "Preencha os valores corretamente!";
+                return;
+            }
+
+            let margem = preco - variavel;
+            if (margem <= 0) {
+                div.style.display = 'block'; div.style.color = 'red';
+                div.innerHTML = "Prejuízo! O custo variável é maior que o preço.";
+                return;
+            }
+
+            let pe = custos / margem;
+            div.style.display = 'block'; div.style.color = '#166534'; div.style.background = '#f0fdf4';
+            div.innerHTML = `Você precisa vender <strong>${Math.ceil(pe)} unidades</strong> para começar a lucrar.`;
+        }
+
+        // Lógica VPL
+        function calcularVPL() {
+            let inv = parseFloat(document.getElementById('vpl_investimento').value);
+            let taxa = parseFloat(document.getElementById('vpl_taxa').value) / 100;
+            let fluxos = document.querySelectorAll('.fluxo');
+            let div = document.getElementById('result_vpl');
+
+            if (!inv) { alert("Digite o investimento inicial"); return; }
+
+            let vpl = -inv;
+            fluxos.forEach((input, index) => {
+                let valor = parseFloat(input.value) || 0;
+                vpl += valor / Math.pow((1 + taxa), index + 1);
+            });
+
+            div.style.display = 'block';
+            div.innerHTML = `VPL: <strong>R$ ${vpl.toFixed(2)}</strong><br>` + 
+                            (vpl > 0 ? "✅ Projeto Viável (Dá Lucro)" : "❌ Projeto Inviável (Dá Prejuízo)");
+        }
+
+        // Lógica TIR (Estimativa Simplificada)
+        function calcularTIR() {
+            let inv = parseFloat(document.getElementById('tir_investimento').value);
+            let fluxos = [];
+            document.querySelectorAll('.tir-fluxo').forEach(i => fluxos.push(parseFloat(i.value) || 0));
+            let div = document.getElementById('result_tir');
+
+            // Estimativa simples iterativa
+            let min = -1.0;
+            let max = 10.0;
+            let guess = 0.1;
+            let vpl = 0;
+            
+            for(let i=0; i<100; i++) {
+                guess = (min + max) / 2;
+                vpl = -inv;
+                for(let j=0; j<fluxos.length; j++) {
+                    vpl += fluxos[j] / Math.pow(1 + guess, j + 1);
+                }
+                if (Math.abs(vpl) < 1) break;
+                if (vpl > 0) min = guess;
+                else max = guess;
+            }
+
+            let tir = guess * 100;
+            div.style.display = 'block';
+            div.innerHTML = `TIR Estimada: <strong>${tir.toFixed(2)}%</strong> ao ano.`;
+        }
+    </script>
 
 </body>
 </html>
