@@ -78,7 +78,33 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { color: var(--azul-logo); margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        /* TÍTULO E BOTÃO DE AJUDA */
+        .card-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        h2 { color: var(--azul-logo); margin: 0; font-size: 1.5rem; }
+        
+        .help-btn {
+            background: transparent;
+            border: 2px solid var(--azul-logo);
+            color: var(--azul-logo);
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .help-btn:hover { background: var(--azul-logo); color: white; }
+
+        /* CAIXA DE AJUDA */
+        .help-box {
+            display: none;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border-left: 5px solid #0284c7;
+        }
         
         /* FORMULÁRIOS */
         .form-group { margin-bottom: 15px; text-align: left; }
@@ -146,28 +172,48 @@
         </div>
 
         <div id="pe" class="calculator-card active">
-            <h2>📊 Ponto de Equilíbrio</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 20px;">Descubra quanto você precisa vender para cobrir os custos.</p>
+            <div class="card-header">
+                <h2>📊 Ponto de Equilíbrio</h2>
+                <button class="help-btn" onclick="toggleHelp('help-pe')">?</button>
+            </div>
             
+            <div id="help-pe" class="help-box">
+                <strong>Para que serve?</strong> Descubra o mínimo que você precisa vender para pagar as contas e não ter prejuízo.<br><br>
+                <strong>Como preencher:</strong><br>
+                1. <em>Custos Fixos:</em> Contas que você paga todo mês mesmo se não vender nada (Aluguel, Internet, MEI).<br>
+                2. <em>Preço de Venda:</em> Por quanto você vende seu produto/serviço.<br>
+                3. <em>Custo Variável:</em> Quanto custa para produzir UMA unidade (matéria-prima, embalagem).
+            </div>
+
             <div class="form-group">
                 <label>Custos Fixos Totais (R$)</label>
-                <input type="number" id="pe_custos" placeholder="Ex: Aluguel, Internet (2000)">
+                <input type="number" id="pe_custos" placeholder="Ex: 2000 (Aluguel + Contas)">
             </div>
             <div class="form-group">
                 <label>Preço de Venda Unitário (R$)</label>
-                <input type="number" id="pe_preco" placeholder="Ex: Preço do produto (50)">
+                <input type="number" id="pe_preco" placeholder="Ex: 50.00">
             </div>
             <div class="form-group">
                 <label>Custo Variável Unitário (R$)</label>
-                <input type="number" id="pe_variavel" placeholder="Ex: Custo para produzir um (20)">
+                <input type="number" id="pe_variavel" placeholder="Ex: 20.00 (Custo para fazer um)">
             </div>
             <button class="calc-btn" onclick="calcularPE()">Calcular Meta</button>
             <div id="result_pe" class="result-box"></div>
         </div>
 
         <div id="vpl" class="calculator-card">
-            <h2>💰 VPL - Valor Presente Líquido</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 20px;">Veja se o investimento vale a pena hoje.</p>
+            <div class="card-header">
+                <h2>💰 VPL - Valor Presente</h2>
+                <button class="help-btn" onclick="toggleHelp('help-vpl')">?</button>
+            </div>
+
+            <div id="help-vpl" class="help-box">
+                <strong>Para que serve?</strong> Analisa se vale a pena investir dinheiro no negócio hoje ou deixá-lo no banco.<br><br>
+                <strong>Como preencher:</strong><br>
+                1. <em>Investimento:</em> Quanto você vai gastar agora para começar.<br>
+                2. <em>Taxa (%):</em> Quanto seu dinheiro renderia na Poupança ou CDB (Ex: 10% ao ano).<br>
+                3. <em>Lucro Esperado:</em> Quanto você acha que vai lucrar limpo nos próximos anos.
+            </div>
 
             <div class="form-group">
                 <label>Investimento Inicial (R$)</label>
@@ -194,8 +240,16 @@
         </div>
 
         <div id="tir" class="calculator-card">
-            <h2>📈 TIR - Taxa Interna de Retorno</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 20px;">A rentabilidade real do seu projeto em %.</p>
+            <div class="card-header">
+                <h2>📈 TIR - Rentabilidade</h2>
+                <button class="help-btn" onclick="toggleHelp('help-tir')">?</button>
+            </div>
+
+            <div id="help-tir" class="help-box">
+                <strong>Para que serve?</strong> Mostra a porcentagem real de retorno do seu negócio. É como saber os "Juros" que seu negócio te paga.<br><br>
+                <strong>Como interpretar:</strong><br>
+                Se a TIR for maior que a Poupança (ex: > 6% ao ano), seu negócio é um bom investimento!
+            </div>
 
             <div class="form-group">
                 <label>Investimento Inicial (R$)</label>
@@ -219,7 +273,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 SimulaMei - Web App Versão 1.0</p>
+        <p>&copy; 2026 SimulaMei - Web App Versão 2.0</p>
         <p>Projeto Integrador VI - UFMT Polo Sorriso</p>
     </footer>
 
@@ -231,6 +285,16 @@
             
             document.getElementById(tabId).classList.add('active');
             event.target.classList.add('active');
+        }
+
+        // Função para mostrar/esconder Ajuda
+        function toggleHelp(helpId) {
+            var x = document.getElementById(helpId);
+            if (x.style.display === "none" || x.style.display === "") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
         }
 
         // Lógica Ponto de Equilíbrio
@@ -249,7 +313,7 @@
             let margem = preco - variavel;
             if (margem <= 0) {
                 div.style.display = 'block'; div.style.color = 'red';
-                div.innerHTML = "Prejuízo! O custo variável é maior que o preço.";
+                div.innerHTML = "Prejuízo! O custo variável é maior que o preço de venda.";
                 return;
             }
 
@@ -278,19 +342,14 @@
                             (vpl > 0 ? "✅ Projeto Viável (Dá Lucro)" : "❌ Projeto Inviável (Dá Prejuízo)");
         }
 
-        // Lógica TIR (Estimativa Simplificada)
+        // Lógica TIR (Estimativa)
         function calcularTIR() {
             let inv = parseFloat(document.getElementById('tir_investimento').value);
             let fluxos = [];
             document.querySelectorAll('.tir-fluxo').forEach(i => fluxos.push(parseFloat(i.value) || 0));
             let div = document.getElementById('result_tir');
 
-            // Estimativa simples iterativa
-            let min = -1.0;
-            let max = 10.0;
-            let guess = 0.1;
-            let vpl = 0;
-            
+            let min = -1.0; let max = 10.0; let guess = 0.1; let vpl = 0;
             for(let i=0; i<100; i++) {
                 guess = (min + max) / 2;
                 vpl = -inv;
@@ -298,8 +357,7 @@
                     vpl += fluxos[j] / Math.pow(1 + guess, j + 1);
                 }
                 if (Math.abs(vpl) < 1) break;
-                if (vpl > 0) min = guess;
-                else max = guess;
+                if (vpl > 0) min = guess; else max = guess;
             }
 
             let tir = guess * 100;
