@@ -31,20 +31,22 @@
         .logo-img { max-width: 100px; border-radius: 10px; margin-bottom: 10px; }
         h1 { margin: 0; font-size: 2rem; font-weight: 800; }
         
-        /* BARRA DE PERFIL */
+        /* BARRA DE PERFIL (CORRIGIDA) */
         .profile-bar {
             background-color: #e0f2fe;
             color: var(--azul-logo);
-            padding: 10px;
+            padding: 15px;
             text-align: center;
             font-weight: bold;
             border-bottom: 2px solid #bae6fd;
             display: none; 
+            font-size: 1.1rem;
         }
 
+        /* CORREÇÃO DO ESPAÇAMENTO: Margin positivo agora */
         .app-section {
             max-width: 800px;
-            margin: -20px auto 0;
+            margin: 20px auto 0; /* Antes era -20px, agora é 20px positivo */
             padding: 0 1rem;
             position: relative;
             z-index: 10;
@@ -122,6 +124,14 @@
 
         .slide h3 { color: var(--azul-logo); font-size: 1.3rem; margin-bottom: 10px; }
         
+        /* LISTAS DIDÁTICAS (NOVO) */
+        .custo-lista {
+            text-align: left; background: #f8fafc; padding: 15px; border-radius: 10px; list-style: none; margin: 10px 0; border: 1px solid #e2e8f0;
+        }
+        .custo-lista li { margin-bottom: 8px; font-size: 0.95rem; }
+        .tag-fixo { color: #dc2626; font-weight: bold; background: #fee2e2; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
+        .tag-var { color: #16a34a; font-weight: bold; background: #dcfce7; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; }
+
         /* BOX EDUCATIVO FINAL */
         .edu-box {
             background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
@@ -137,7 +147,6 @@
         }
         .quiz-option:hover { border-color: var(--azul-logo); background: #f8fafc; }
         
-        /* FEEDBACK DO QUIZ (SEM POPUP) */
         .quiz-feedback {
             margin-top: 15px; padding: 10px; border-radius: 8px; display: none; font-weight: bold;
         }
@@ -166,7 +175,7 @@
             font-weight: bold; text-align: center; display: none;
         }
 
-        /* MODAL DE CADASTRO (Único Popup Necessário) */
+        /* MODAL DE CADASTRO */
         #login-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 100;
@@ -184,7 +193,7 @@
     <div id="login-modal">
         <div class="login-box">
             <h2 style="color: var(--azul-logo);">Bem-vindo! 🎓</h2>
-            <p>Para personalizar seu certificado futuro, qual seu nome?</p>
+            <p>Para começar, qual seu nome?</p>
             <div class="form-group">
                 <input type="text" id="user_name" placeholder="Digite seu nome...">
             </div>
@@ -212,30 +221,36 @@
         <div id="curso" class="calculator-card active">
             
             <div class="slide active" id="slide1">
-                <h3>Aula 1: A "Cegueira" Financeira</h3>
-                <p>O maior risco para o MEI não é a concorrência, é a falta de controle.</p>
+                <h3>Aula 1: O "Vilão" Invisível</h3>
+                <p>Muitos MEIs fecham as portas vendendo bem. O motivo? <strong>Descontrole.</strong></p>
                 <div style="background:#fff7ed; padding:15px; border-radius:10px; margin:15px 0; border-left:4px solid #f97316;">
-                    <strong>Fato:</strong> Misturar o dinheiro de casa com o da empresa é o motivo #1 de falências no Brasil.
+                    <strong>Regra nº 1:</strong> O caixa da empresa NÃO é sua carteira. Se você pagar a pizza de domingo com o cartão CNPJ, sua empresa "acha" que teve prejuízo.
                 </div>
-                <button class="calc-btn" onclick="nextSlide(2)">Próximo: Como Resolver ➡️</button>
+                <button class="calc-btn" onclick="nextSlide(2)">Próximo: Entendendo Custos ➡️</button>
             </div>
 
             <div class="slide" id="slide2">
-                <h3>Aula 2: Entendendo os Custos</h3>
-                <p>Para calcular preço, separe:</p>
-                <ul style="text-align:left; background:#f1f5f9; padding:15px 25px; border-radius:10px; list-style:none;">
-                    <li style="margin-bottom:8px">🏢 <strong>Fixo:</strong> Você paga dormindo (Aluguel, Taxas).</li>
-                    <li>📦 <strong>Variável:</strong> Só paga se produzir (Matéria-prima).</li>
+                <h3>Aula 2: Quem é Quem?</h3>
+                <p>Para precificar, você precisa separar os custos:</p>
+                
+                <ul class="custo-lista">
+                    <li><span class="tag-fixo">FIXO</span> <strong>Aluguel e Internet:</strong> Chega todo mês, vendendo ou não.</li>
+                    <li><span class="tag-fixo">FIXO</span> <strong>Taxa MEI (DAS):</strong> Valor fixo mensal obrigatório.</li>
+                    <li><span class="tag-var">VARIÁVEL</span> <strong>Matéria-Prima:</strong> Ingredientes, peças, produtos para revenda.</li>
+                    <li><span class="tag-var">VARIÁVEL</span> <strong>Taxa de Cartão:</strong> A maquininha cobra % sobre cada venda.</li>
+                    <li><span class="tag-var">VARIÁVEL</span> <strong>Embalagem:</strong> Sacolas, caixas, fitas.</li>
                 </ul>
+
                 <button class="calc-btn" onclick="nextSlide(3)">Próximo: Teste Rápido ➡️</button>
             </div>
 
             <div class="slide" id="slide3">
                 <h3>Desafio do Conhecimento</h3>
-                <p><strong>Pergunta:</strong> Se você der um desconto, de onde sai esse dinheiro?</p>
+                <p><strong>Situação:</strong> Você vende bolos. O Gás de Cozinha acabou porque você assou muitas encomendas.</p>
+                <p>O Gás é um custo:</p>
                 
-                <button class="quiz-option" onclick="feedbackQuiz(false)">A) Do Custo do Material</button>
-                <button class="quiz-option" onclick="feedbackQuiz(true)">B) Do meu Lucro</button>
+                <button class="quiz-option" onclick="feedbackQuiz(true)">A) Variável (Produziu mais, gastou mais)</button>
+                <button class="quiz-option" onclick="feedbackQuiz(false)">B) Fixo (Vem todo mês igual)</button>
                 
                 <div id="feedback-area" class="quiz-feedback"></div>
                 
@@ -243,16 +258,16 @@
             </div>
 
             <div class="slide" id="slide4">
-                <h3 style="color:var(--verde-logo)">Módulo Básico Concluído! 🏆</h3>
-                <p>Você já sabe o básico. Use as calculadoras acima para praticar.</p>
+                <h3 style="color:var(--verde-logo)">Parabéns! 🏆</h3>
+                <p>Você entendeu a lógica! Agora use as calculadoras acima para praticar com os números do seu negócio.</p>
 
                 <div class="edu-box">
-                    <h4>📚 Quer continuar estudando?</h4>
-                    <p style="font-size:0.9rem; opacity:0.9">O site é apenas para cálculos rápidos. Para uma formação completa, baixe nosso App:</p>
+                    <h4>📚 Quer salvar seus dados?</h4>
+                    <p style="font-size:0.9rem; opacity:0.9">Este site é uma calculadora rápida. Para gestão completa, use nosso App:</p>
                     <ul style="text-align:left; margin-bottom:20px; font-size:0.9rem">
-                        <li>✅ Salve seu progresso nas aulas</li>
-                        <li>✅ Acesse módulos avançados</li>
-                        <li>✅ Histórico financeiro mensal</li>
+                        <li>✅ Salve seu histórico mensal</li>
+                        <li>✅ Relatórios de Lucro Real</li>
+                        <li>✅ Controle de "Fiado"</li>
                     </ul>
                     <button class="calc-btn" style="background:white; color:#4f46e5" onclick="alert('Em breve disponível para Android!')">Baixar App Completo</button>
                 </div>
@@ -266,13 +281,13 @@
             </div>
             
             <div id="help-pe" class="help-box">
-                <strong>O que é?</strong> A meta mínima de vendas para pagar as contas (zero a zero).<br>
-                <strong>Preencha:</strong> Seus custos fixos (aluguel, etc), preço de venda e quanto custa fazer um produto.
+                <strong>O que é?</strong> A meta mínima para não ter prejuízo.<br>
+                <strong>Exemplo:</strong> Se der 50 unidades, e você vender 49, teve prejuízo. Se vender 51, começou a lucrar.
             </div>
 
-            <div class="form-group"><label>Custos Fixos Totais (R$)</label><input type="number" id="pe_custos"></div>
+            <div class="form-group"><label>Custos Fixos Totais (R$)</label><input type="number" id="pe_custos" placeholder="Soma de Aluguel, MEI, Net..."></div>
             <div class="form-group"><label>Preço de Venda (R$)</label><input type="number" id="pe_preco"></div>
-            <div class="form-group"><label>Custo Variável Unitário (R$)</label><input type="number" id="pe_variavel"></div>
+            <div class="form-group"><label>Custo Variável Unitário (R$)</label><input type="number" id="pe_variavel" placeholder="Custo para fazer UM item"></div>
             <button class="calc-btn" onclick="calcularPE()">Calcular Meta</button>
             <div id="result_pe" class="result-box"></div>
         </div>
@@ -284,12 +299,12 @@
             </div>
 
             <div id="help-vpl" class="help-box">
-                <strong>O que é?</strong> Diz se vale a pena investir hoje.<br>
-                <strong>Como funciona:</strong> Se o resultado for POSITIVO, o negócio dá mais dinheiro que a poupança.
+                <strong>Para que serve?</strong> Para saber se vale a pena investir dinheiro no negócio ou deixar rendendo no banco (Poupança/CDB).<br>
+                <strong>Resultado:</strong> Se for positivo, Invista!
             </div>
 
             <div class="form-group"><label>Investimento Inicial (R$)</label><input type="number" id="vpl_investimento"></div>
-            <div class="form-group"><label>Taxa de Juros Anual (%)</label><input type="number" id="vpl_taxa"></div>
+            <div class="form-group"><label>Taxa de Juros Anual (%)</label><input type="number" id="vpl_taxa" placeholder="Ex: 10"></div>
             <div class="form-group"><label>Lucro Ano 1</label><input type="number" class="fluxo"></div>
             <div class="form-group"><label>Lucro Ano 2</label><input type="number" class="fluxo"></div>
             <button class="calc-btn" onclick="calcularVPL()">Calcular VPL</button>
@@ -303,8 +318,8 @@
             </div>
 
             <div id="help-tir" class="help-box">
-                <strong>O que é?</strong> A taxa real de retorno do seu dinheiro.<br>
-                <strong>Exemplo:</strong> Se a TIR for 20% e a Poupança paga 6%, seu negócio é muito bom!
+                <strong>O que é?</strong> É a "Taxa de Juros" que seu negócio paga para você.<br>
+                <strong>Como ler:</strong> Quanto maior, melhor. Compare com a Poupança (6% a.a).
             </div>
 
             <div class="form-group"><label>Investimento Inicial (R$)</label><input type="number" id="tir_investimento"></div>
@@ -319,7 +334,7 @@
     <footer><p>&copy; 2026 SimulaMei - Projeto Integrador VI</p></footer>
 
     <script>
-        // --- LÓGICA DO CURSO (SEM POPUP) ---
+        // --- LÓGICA DO CURSO ---
         function nextSlide(n) {
             document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
             document.getElementById('slide' + n).classList.add('active');
@@ -332,18 +347,18 @@
             area.style.display = 'block';
             if(acertou) {
                 area.className = 'quiz-feedback feedback-certo';
-                area.innerHTML = "✅ Correto! O desconto sai 100% do seu bolso.";
+                area.innerHTML = "✅ Correto! Se você assa mais, gasta mais gás. Por isso varia.";
                 btn.style.display = 'block';
             } else {
                 area.className = 'quiz-feedback feedback-erro';
-                area.innerHTML = "⚠️ Não! O custo do material você já pagou. O desconto reduz o seu Lucro. Tente a outra opção.";
+                area.innerHTML = "⚠️ Não exatamente. Se você fechar a loja e não assar nada, a conta de gás vem quase zero. Tente de novo.";
                 btn.style.display = 'none';
             }
         }
 
         // --- SISTEMA DE CADASTRO ---
         window.onload = function() {
-            let nome = localStorage.getItem("mei_nome_v7");
+            let nome = localStorage.getItem("mei_nome_v8");
             if (nome) {
                 document.getElementById('login-modal').style.display = 'none';
                 document.getElementById('profile-display').style.display = 'block';
@@ -354,20 +369,17 @@
         function salvarPerfil() {
             let nome = document.getElementById('user_name').value;
             if(!nome) return;
-            localStorage.setItem("mei_nome_v7", nome);
+            localStorage.setItem("mei_nome_v8", nome);
             location.reload();
         }
 
         // --- SISTEMA DE ABAS ---
         function showTab(tabId) {
-            // Esconde tudo
             document.querySelectorAll('.calculator-card').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             
-            // Mostra o atual
             document.getElementById(tabId).classList.add('active');
             
-            // Ativa botão (gambiarra simples para identificar qual botão ativar)
             let btns = document.querySelectorAll('.tab-btn');
             if(tabId=='curso') btns[0].classList.add('active');
             if(tabId=='pe') btns[1].classList.add('active');
@@ -375,7 +387,7 @@
             if(tabId=='tir') btns[3].classList.add('active');
         }
 
-        // --- BOTÃO DE AJUDA ---
+        // --- AJUDA ---
         function toggleHelp(id) {
             let box = document.getElementById(id);
             if(box.style.display === 'block') box.style.display = 'none';
